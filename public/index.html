@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+
+    <link rel="shortcut icon" href="./image/tapioca.png">
+    <title>タピオカマップ in Morioka</title>
+</head>
+
+<body>
+    <!-- nav -->
+    <div style="background-color:burlywood;">
+            <a class="tapioca" href="">タピオカマップ</a>
+    </div>
+
+    <div id="target"></div>
+
+
+    <!-- <div class="container-fluid text-center" style="background-color:burlywood;">
+        <a class="tapioca" href="http://syuheiman.com">by　藤田修平ブログ</a>
+    </div> -->
+
+<!-- googlemapScript -->
+    <script src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key=AIzaSyCno7Jdm4PsvZ_G9cdNu04_PD4IOjl1VwA&callback=initMap" async defer></script>
+    <script>
+        function initMap() {
+            'use strict';
+
+            // 描画領域の取得
+            var target = document.getElementById('target');
+            // マップ用の変数宣言
+            var map;
+
+            // 緯度経度の変数宣言
+            var morioka = {lat: 39.701956, lng: 141.14433};
+            var favoriteCafe = {lat: 39.702881, lng: 141.141447};
+            var SlowCafe = {lat: 39.703023, lng: 141.144443};
+            var Pamplemousse = {lat: 39.703255, lng: 141.145348};
+
+            
+            var marker;
+            // var infoWindow;
+
+            // Mapのインスタンスを作成
+            map = new google.maps.Map(target, {
+                center: morioka,
+                zoom: 15,
+                disableDefaultUI: true,
+                zoomControl: true
+            });
+
+            // infoWindow = new google.maps.infoWindow({
+            //     position: favoriteCafe,
+            //     content: 'aaa'
+            // })
+
+            // infoWindowインスタンスは表示するmapを指定する必要がある
+            // infoWindow.open(map, maker);
+
+            // マーカー1を設置
+            marker = new google.maps.Marker({
+                position: favoriteCafe,
+                map: map,
+                title: 'favoriteCafe',
+                icon: {
+                    url: './image/tapioca.png',
+                    scaledSize: new google.maps.Size(40,40)
+                }
+            });
+
+            marker = new google.maps.Marker({
+                position: SlowCafe,
+                map: map,
+                title: 'SLOWCafe',
+                icon: {
+                    url: './image/tapioca.png',
+                    scaledSize: new google.maps.Size(40,40)
+                }
+            });
+
+            marker = new google.maps.Marker({
+                position: Pamplemousse,
+                map: map,
+                title: 'Pamplemousse',
+                icon: {
+                    url: './image/tapioca.png',
+                    scaledSize: new google.maps.Size(40,40)
+                }
+            });
+
+            // クリックした時のイベント
+            map.addListener('click', function(e){
+                console.log(e.latLng.lat());
+                console.log(e.latLng.lng());
+                console.log(e.latLng.toString());
+            });
+
+            Geolocation
+            
+            / geolocationがデバイスに対応しているか
+            if(!navigator.geolocation){
+                alert('Geolocation no supported')
+            }
+
+            // 位置情報の取得
+            navigator.geolocation.getCurrentPosition(function(position){
+                new google.maps.Map(target, {
+                    center: {
+                        lat: position.coords.latitude,
+                        lng: position.coords.lngitude
+                        
+                    },
+                    zoom: 15
+                });
+            }, function(){
+                alert('Geolocation faild')
+                return;
+            });
+        }
+    </script>
+<!-- googlemapScript -->
+
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.3.1/firebase-app.js"></script>
+    
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#config-web-app -->
+    
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyAYgxAVzfNer1S5N644B6X_Eq9oZ0U3EHo",
+            authDomain: "airbnb2-c3ec5.firebaseapp.com",
+            databaseURL: "https://airbnb2-c3ec5.firebaseio.com",
+            projectId: "airbnb2-c3ec5",
+            storageBucket: "",
+            messagingSenderId: "491559268167",
+            appId: "1:491559268167:web:8e23405d4e9b5dcb"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <!-- bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="./js/jquery-slim.min.js"><\/script>')</script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <!-- bootstrap -->
+</body>
+</html>
+
+<!-- ホバーで住所表示 -->

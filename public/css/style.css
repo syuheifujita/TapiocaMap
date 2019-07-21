@@ -1,0 +1,36 @@
+#target {
+    width: 700px;
+    height: 700px;
+}
+
+.tapioca{
+    color: white;
+    text-decoration: none;
+}
+
+/* .center {
+    margin: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+
+body {
+    /* background-image: url("../image/tapioca.png"); */
+    /* background-repeat: repeat; */
+    /* background-size: 80px; */
+    /* background-position: 50%; */
+}
+
+
+html {
+
+height: 100% ;
+
+}
+
+body {
+
+height: 100%; margin: 0px; padding: 0px ;
+
+}
